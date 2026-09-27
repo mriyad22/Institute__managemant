@@ -10,7 +10,7 @@ class AuthUserModel(AbstractUser):
         ("Admin", "Admin")
     )
 
-    user_type = models.CharField(max_length=20, choices=USER_TYPE, null=True)
+    user_type = models.CharField(max_length=20, choices=USER_TYPE, default="Student", null=True)
 
     def __str__(self):
         return f"{self.username}"

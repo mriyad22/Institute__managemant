@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import *
 
+from teachers.models import *
+from students.models import *
+
 # Create your views here.
 def user_register_view(request):
     if not request.user.is_authenticated and request.user.user_type != "Admin":
@@ -63,3 +66,20 @@ def logoutview(request):
 def dashboardveiew(request):
 
     return render(request, "dasboard.html")
+
+
+
+#============================================================
+
+def display_all_student(request):
+    all_student = StudentModel.objects.all()
+    all_teacher = TeacherModel.objects.all()
+
+    con = {
+        "data" : all_student,
+        "tdata" : all_teacher,
+        
+    }
+
+    return render(request, "adminboard.html", con)
+

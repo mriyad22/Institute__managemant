@@ -64,17 +64,24 @@
         <li class="nav-item">
           <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
         </li>
+        
+        {% if request.user.user_type == 'Admin' %}
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/job-list/' %}active{% endif %}" href="{% url 'all_tea_std' %}">AdminBoard</a>
+          </li>
+        {% endif %}
+          
 
         <li class="nav-item">
           <a class="nav-link {% if request.path == '/job-list/' %}active{% endif %}" href="#">Teachers</a>
         </li>
 
         
-        {% if request.user.is_authenticated %}
+        
           <li class="nav-item">
             <a class="nav-link {% if request.path == '/profile/' %}active{% endif %}" href="#">Students</a>
           </li>
-        {% endif %}
+        
       </ul>
 
       <!-- Right Side -->
