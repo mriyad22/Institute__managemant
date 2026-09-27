@@ -61,7 +61,7 @@
                         <p class="card-text text-muted small">Phone: {{request.user.teacher_profile.phone}} </p>
 
                         <!-- Button -->
-                        <a href="#" class="btn btn-primary rounded-pill px-4">Update</a>
+                        <a href="{% url 'tea_pro_update' %}" class="btn btn-primary rounded-pill px-4">Update</a>
                         <a href="#" class="btn btn-primary rounded-pill px-4">Change passwd</a>
                     </div>
                 {% endif %}
