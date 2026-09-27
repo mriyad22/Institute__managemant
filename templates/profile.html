@@ -1,71 +1,623 @@
 {% extends 'master/base.html' %}
 
+{% block title %}
+    Profile
+{% endblock %}
+
 {% block content %}
-    <h1>Profiel</h1>
-    <div class="container">
-    
-        <div class="card shadow-lg border-0 rounded-4 overflow-hidden" style="width: 20rem;">
-                
-                {% if request.user.user_type == 'Student' %}
-                    <!-- Image -->
-                    <div class="text-center pt-3">
-                        <img src="{{request.user.student_profile.image.url}}"
-                            class="card-img-top rounded-circle shadow"
-                            style="width: 120px; height: 120px; object-fit: cover;"
-                            alt="profile">
+
+<style>
+
+    body {
+        background: #f5f7fb;
+    }
+
+    /* Main Wrapper */
+    .profile-wrapper {
+        max-width: 450px;
+        margin: 25px auto;
+    }
+
+    /* Profile Card */
+    .profile-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Header */
+    .profile-header {
+        height: 110px;
+        background: linear-gradient(135deg, #0d6efd, #6610f2);
+        position: relative;
+    }
+
+    /* Profile Image */
+    .profile-image-wrapper {
+        position: absolute;
+        bottom: -45px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .profile-image {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.18);
+    }
+
+    /* Body */
+    .profile-body {
+        padding: 60px 25px 22px;
+    }
+
+    /* Name */
+    .profile-name {
+        font-size: 21px;
+        font-weight: 700;
+        margin-bottom: 2px;
+        color: #212529;
+    }
+
+    .profile-role {
+        color: #6c757d;
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+
+    /* User Type */
+    .user-type {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        background: #e7f1ff;
+        color: #0d6efd;
+        font-size: 11px;
+        font-weight: 600;
+    }
+
+    /* Information */
+    .info-section {
+        margin-top: 22px;
+    }
+
+    .section-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: #212529;
+    }
+
+    .info-box {
+        background: #f8f9fa;
+        border-radius: 9px;
+        padding: 10px 13px;
+        border: 1px solid #eee;
+        height: 100%;
+    }
+
+    .info-label {
+        font-size: 10px;
+        color: #6c757d;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    .info-value {
+        font-size: 13px;
+        font-weight: 600;
+        color: #212529;
+    }
+
+    /* Buttons */
+    .profile-actions {
+        margin-top: 22px;
+        padding-top: 17px;
+        border-top: 1px solid #eee;
+    }
+
+    .btn-profile {
+        border-radius: 25px;
+        padding: 7px 16px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    /* Mobile */
+    @media (max-width: 576px) {
+
+        .profile-wrapper {
+            margin: 15px 10px;
+        }
+
+        .profile-header {
+            height: 100px;
+        }
+
+        .profile-body {
+            padding: 55px 15px 18px;
+        }
+
+        .profile-image {
+            width: 80px;
+            height: 80px;
+        }
+
+        .profile-image-wrapper {
+            bottom: -40px;
+        }
+
+        .profile-name {
+            font-size: 19px;
+        }
+
+        .profile-actions .btn {
+            width: 100%;
+        }
+    }
+
+</style>
+
+
+
+<div class="container">
+
+    <div class="profile-wrapper">
+
+        <div class="profile-card">
+
+
+            <!-- HEADER -->
+
+            <div class="profile-header">
+
+                <div class="profile-image-wrapper">
+
+                    {% if request.user.user_type == 'Student' %}
+
+                        <img
+                            src="{{ request.user.student_profile.image.url }}"
+                            class="profile-image"
+                            alt="Student Profile">
+
+                    {% elif request.user.user_type == 'Admin' %}
+
+                        <img
+                            src="{{ request.user.image.url }}"
+                            class="profile-image"
+                            alt="Admin Profile">
+
+                    {% else %}
+
+                        <img
+                            src="{{ request.user.teacher_profile.image.url }}"
+                            class="profile-image"
+                            alt="Teacher Profile">
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- BODY -->
+
+            <div class="profile-body">
+
+
+                <!-- NAME -->
+
+                <div class="text-center">
+
+                    {% if request.user.user_type == 'Student' %}
+
+                        <h2 class="profile-name">
+                            {{ request.user.student_profile.name }}
+                        </h2>
+
+                        
+
+                        <span class="user-type">
+                            Student Account
+                        </span>
+
+
+                    {% elif request.user.user_type == 'Admin' %}
+
+                        <h2 class="profile-name">
+                            {{ request.user.username }}
+                        </h2>
+
+                        <p class="profile-role">
+                            Administrator
+                        </p>
+
+                        <span class="user-type">
+                            Admin Account
+                        </span>
+
+
+                    {% else %}
+
+                        <h2 class="profile-name">
+                            {{ request.user.teacher_profile.name }}
+                        </h2>
+
+
+                        <span class="user-type">
+                            Teacher Account
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- INFORMATION -->
+
+                <div class="info-section">
+
+                    <h4 class="section-title">
+                        Personal Information
+                    </h4>
+
+
+                    <div class="row g-2">
+
+
+                        <!-- STUDENT -->
+
+                        {% if request.user.user_type == 'Student' %}
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Full Name
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.student_profile.name }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Roll Number
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.student_profile.roll }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Phone
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.student_profile.phone }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Address
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.student_profile.address }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Username
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.username }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Account Type
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.user_type }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        <!-- ADMIN -->
+
+                        {% elif request.user.user_type == 'Admin' %}
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Username
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.username }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Email
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.email }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Account Type
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.user_type }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Status
+                                    </div>
+
+                                    <div class="info-value">
+
+                                        {% if request.user.is_active %}
+                                            Active
+                                        {% else %}
+                                            Inactive
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        <!-- TEACHER -->
+
+                        {% else %}
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Full Name
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.teacher_profile.name }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Phone
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.teacher_profile.phone }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Address
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.teacher_profile.address }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Username
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.username }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="info-box">
+
+                                    <div class="info-label">
+                                        Account Type
+                                    </div>
+
+                                    <div class="info-value">
+                                        {{ request.user.user_type }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        {% endif %}
+
                     </div>
 
-                    <!-- Body -->
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold">Name: {{request.user.student_profile.name}} </h5>
-                        <p class="card-text text-muted small">Address: {{request.user.student_profile.address}} </p>
-                        <p class="card-text text-muted small">Phone: {{request.user.student_profile.phone}} </p>
-                        <p class="card-text text-muted small">Roll: {{request.user.student_profile.roll}} </p>
+                </div>
 
-                        <!-- Button -->
-                        <a href="{% url 'std_update_pro' %}" class="btn btn-primary rounded-pill px-4">Edit</a>
-                        <a href="#" class="btn btn-primary rounded-pill px-4">Change passwd</a>
+
+                <!-- ACTION BUTTONS -->
+
+                <div class="profile-actions">
+
+                    <div class="d-flex justify-content-center gap-2 flex-wrap">
+
+
+                        {% if request.user.user_type == 'Student' %}
+
+                            <a
+                                href="{% url 'std_update_pro' %}"
+                                class="btn btn-primary btn-profile">
+
+                                ✏️ Edit Profile
+
+                            </a>
+
+                        {% elif request.user.user_type == 'Admin' %}
+
+                            <a
+                                href="#"
+                                class="btn btn-primary btn-profile">
+
+                                ✏️ Edit Profile
+
+                            </a>
+
+                        {% else %}
+
+                            <a
+                                href="{% url 'tea_pro_update' %}"
+                                class="btn btn-primary btn-profile">
+
+                                ✏️ Edit Profile
+
+                            </a>
+
+                        {% endif %}
+
+
+                        <a
+                            href="#"
+                            class="btn btn-outline-secondary btn-profile">
+
+                            🔑 Change Password
+
+                        </a>
+
+
+                        <a
+                            href="{% url 'logout_page' %}"
+                            class="btn btn-outline-danger btn-profile">
+
+                            🚪 Logout
+
+                        </a>
+
                     </div>
 
-                {% elif request.user.user_type == 'Admin' %}
-                    <div class="text-center pt-3">
-                        <img src="{{request.user.image.url}}"
-                            class="card-img-top rounded-circle shadow"
-                            style="width: 120px; height: 120px; object-fit: cover;"
-                            alt="profile">
-                    </div>
+                </div>
 
-                    <!-- Body -->
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold">Name: {{request.user.username}} </h5>
-                        <p class="card-text text-muted small">Address: {{request.user.email}} </p>
 
-                        <!-- Button -->
-                        <a href="#" class="btn btn-primary rounded-pill px-4">Update</a>
-                        <a href="#" class="btn btn-primary rounded-pill px-4">Change passwd</a>
-                    </div>
-
-                {% else %}
-                    <!-- Image -->
-                    <div class="text-center pt-3">
-                        <img src="{{request.user.teacher_profile.image.url}}"
-                            class="card-img-top rounded-circle shadow"
-                            style="width: 120px; height: 120px; object-fit: cover;"
-                            alt="profile">
-                    </div>
-
-                    <!-- Body -->
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold">Name: {{request.user.teacher_profile.name}} </h5>
-                        <p class="card-text text-muted small">Address: {{request.user.teacher_profile.address}} </p>
-                        <p class="card-text text-muted small">Phone: {{request.user.teacher_profile.phone}} </p>
-
-                        <!-- Button -->
-                        <a href="{% url 'tea_pro_update' %}" class="btn btn-primary rounded-pill px-4">Update</a>
-                        <a href="#" class="btn btn-primary rounded-pill px-4">Change passwd</a>
-                    </div>
-                {% endif %}
+            </div>
 
         </div>
+
     </div>
+
+</div>
+
 {% endblock %}

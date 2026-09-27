@@ -6,7 +6,7 @@ from .models import *
 # Create your views here.
 
 def student_profile(request):
-    if not request.user.is_authenticated or request.user.user_type == "Student":
+    if not request.user.is_authenticated or request.user.user_type != "Student":
         messages.warning(request, "You don't have permision here!")
         return redirect("dashboard")
 
