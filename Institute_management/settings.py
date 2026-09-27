@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #crispy bootstrap5
+    "crispy_forms",
+    "crispy_bootstrap5",
+
     #My app
     'accounts', 
     'teachers',
@@ -135,4 +139,10 @@ MAILERS = {
 
 AUTH_USER_MODEL = "accounts.AuthUserModel"
 
-LOGIN_URL = "login"
+LOGIN_URL = "login_page"
+
+
+#crispy
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+

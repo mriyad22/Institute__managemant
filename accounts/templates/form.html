@@ -1,5 +1,7 @@
 {% extends 'master/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %} {{title}} {% endblock %}
 
 {% block content %}
@@ -11,7 +13,8 @@
 
                 <form method="post" class="p-4 bg-white shadow rounded-4" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ data.as_p }}
+
+                    {{ data | crispy}}
 
                     <button type="submit" class="btn btn-primary w-100 rounded-pill fw-semibold">{{btn}}</button>
                 </form>
