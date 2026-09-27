@@ -134,3 +134,5 @@ MAILERS = {
 
 
 AUTH_USER_MODEL = "accounts.AuthUserModel"
+
+LOGIN_URL = "login"
