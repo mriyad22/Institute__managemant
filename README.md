@@ -1,1 +1,1 @@
-# school_managemant
+# Institute_managemant
