@@ -191,7 +191,7 @@
                             src="{{ request.user.image.url }}"
                             class="profile-image"
                             alt="Admin Profile">
-
+                        
                     {% else %}
 
                         <img
@@ -580,7 +580,7 @@
                         {% else %}
 
                             <a
-                                href="{% url 'tea_pro_update' %}"
+                                href="{% url 'tea_update' request.user.teacher_profile.id %}"
                                 class="btn btn-primary btn-profile">
 
                                 ✏️ Edit Profile

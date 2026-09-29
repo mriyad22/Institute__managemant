@@ -3,31 +3,56 @@ from .forms import *
 from .views import *
 from django.contrib import messages
 
-
 # Create your views here.
+def teacher(request):
+    return render(request, "tea/teacher.html", {"title" : "add teacher"})
 
-def tea_pro_update(request):
-    try:
-        user_data = request.user.teacher_profile
-    except TeacherModel.DoesNotExist:
-        user_data = None
+def add_teacher(request):
     if request.method == "POST":
-        form_data = TeacherProfileForm(request.POST, request.FILES, instance=user_data )
+        form_data = TeacherProfileForm(request.POST, request.FILES)
         if form_data.is_valid():
-            data = form_data.save(commit=False)
-            data.teacher = request.user
-            data.save()
+            form_data.save()
             messages.success(request, "Teacher Profile update successfully")
-            return redirect("tea_profile")
+            return redirect("all_tea_std")
 
-    form_data = TeacherProfileForm(instance=user_data)
+    form_data = TeacherProfileForm()
     con = {
         "data" : form_data,
-        "title" : "teacher profile update",
-        "btn" : "updata"
+        "title" : "Create teacher profile",
+        "btn" : "Create"
     }
             
     return render(request, "form.html", con)
+
+
+
+
+def teacher_profile_update(request, u_id):
+    update_id = TeacherModel.objects.get(id = u_id)
+    if request.method == "POST":
+        form_data = TeacherProfileUpdateForm(request.POST, request.FILES, instance=update_id)
+        if form_data.is_valid():
+            form_data.save()
+            messages.success(request, "Teacher Profile update successfully")
+            return redirect("tea_profile")
+
+    form_data = TeacherProfileUpdateForm(instance=update_id)
+    con = {
+        "data" : form_data,
+        "title" : "teacher profile update",
+        "btn" : "Update"
+    }
+            
+    return render(request, "form.html", con)
+
+
+
+def delete_teacher(request, d_id):
+    delete_id = TeacherModel.objects.get(id = d_id)
+    delete_id.delete()
+    messages.success(request, "Teacher deleted")
+    return redirect("all_tea_std")
+
 
 
 

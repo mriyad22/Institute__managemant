@@ -6,7 +6,8 @@ from .models import *
 # Create your views here.
 def studentview(request):
 
-    return render(request, "std/student.html")
+
+    return render(request, "std/student.html", {"title" : "add student"})
 
 
 def student_profile(request):
@@ -24,8 +25,8 @@ def student_profile(request):
     form_data = StudentProfileForm() 
     con = {
         "data" : form_data,
-        "title" : " student profile", 
-        "btn" : "Update"
+        "title" : "Create student profile", 
+        "btn" : "Create"
     }
     return render(request, "form.html", con)
 
