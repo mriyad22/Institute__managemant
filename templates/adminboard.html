@@ -182,6 +182,7 @@
             <th scope="col">Roll</th>
             <th scope="col">Address</th>
             <th scope="col">Type</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
 
@@ -213,6 +214,10 @@
               <span class="type-badge">
                 {{ x.student.user_type }}
               </span>
+            </td>
+
+            <td>
+              <a href="{% url 'std_delete' x.id %}" class="btn btn-danger btn-profile">Delete</a>
             </td>
 
           </tr>

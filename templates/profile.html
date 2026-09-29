@@ -23,7 +23,7 @@
         background: #fff;
         border-radius: 16px;
         overflow: hidden;
-        box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 7px 25px rgba(37, 36, 36, 0.23);
     }
 
     /* Header */
@@ -47,7 +47,7 @@
         object-fit: cover;
         border-radius: 50%;
         border: 4px solid #fff;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.18);
+        box-shadow: 0 4px 15px rgba(43, 42, 42, 0.29);
     }
 
     /* Body */
@@ -60,11 +60,11 @@
         font-size: 21px;
         font-weight: 700;
         margin-bottom: 2px;
-        color: #212529;
+        color: #201f1f;
     }
 
     .profile-role {
-        color: #6c757d;
+        color: #828a99;
         font-size: 13px;
         margin-bottom: 5px;
     }
@@ -560,7 +560,7 @@
                         {% if request.user.user_type == 'Student' %}
 
                             <a
-                                href="{% url 'std_update_pro' %}"
+                                href="{% url 'student_update' request.user.student_profile.id %}"
                                 class="btn btn-primary btn-profile">
 
                                 ✏️ Edit Profile
