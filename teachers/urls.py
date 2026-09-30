@@ -7,6 +7,6 @@ urlpatterns = [
     path("tea-profile/", tea_profileview, name="tea_profile"),
     path("teacher/", teacher, name="teacher"),
 
-    path("delete/<int:d_id>/", delete_teacher, name="tea_delete"),
     path('tea-pro-up/<int:u_id>/', teacher_profile_update, name="tea_update"),
+    path("delete/<int:pk>/", delete_student, name="delete"),
 ]

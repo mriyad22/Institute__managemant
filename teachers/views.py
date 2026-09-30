@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .views import *
 from django.contrib import messages
@@ -47,11 +47,23 @@ def teacher_profile_update(request, u_id):
 
 
 
-def delete_teacher(request, d_id):
-    delete_id = TeacherModel.objects.get(id = d_id)
-    delete_id.delete()
-    messages.success(request, "Teacher deleted")
-    return redirect("all_tea_std")
+
+def delete_student(request, pk):
+
+    teacher = get_object_or_404(TeacherModel, pk=pk)
+
+    if request.method == "POST":
+        teacher.delete()
+        return redirect("all_tea_std")
+
+    context = {
+        "object": teacher,
+        "title" : f"delete id - {pk}"
+    }
+
+    return render(request, "delete.html", context)
+
+
 
 
 
