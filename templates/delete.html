@@ -7,10 +7,19 @@
 {% block content %}
   <div class="container mt-4">
     <h5>{{title}}</h5>
+    
+    {% if name %}
     <p>
       Are you sure you want to delete
       <strong>{{ object.name }}</strong>?
     </p>
+    {% else %}
+    <p>
+      Are you sure you want to delete
+      <strong>{{ object.title }}</strong>?
+    </p>
+    {% endif %}
+      
 
     <form method="POST">
       {% csrf_token %}
