@@ -1,0 +1,297 @@
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="row g-4">
+
+            <!-- About -->
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-brand">
+                    <h4>
+                        <i class="bi bi-mortarboard-fill"></i>
+                        EduCourse
+                    </h4>
+                    <p>
+                        Learn, grow and build your future with our
+                        online course management platform. Explore
+                        quality courses and improve your skills.
+                    </p>
+
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" aria-label="GitHub">
+                            <i class="bi bi-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-md-6">
+                <h5 class="footer-title">Quick Links</h5>
+
+                <ul class="footer-links">
+                    <li>
+                        <a href="{% url 'dashboard' %}">
+                            <i class="bi bi-chevron-right"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'course_list' %}">
+                            <i class="bi bi-chevron-right"></i>
+                            Courses
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'teacher' %}">
+                            <i class="bi bi-chevron-right"></i>
+                            Teachers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'student' %}">
+                            <i class="bi bi-chevron-right"></i>
+                            Students
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Useful Links -->
+            <div class="col-lg-2 col-md-6">
+                <h5 class="footer-title">Useful Links</h5>
+
+                <ul class="footer-links">
+                    <li>
+                        <a href="#">
+                            <i class="bi bi-chevron-right"></i>
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bi bi-chevron-right"></i>
+                            Contact
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bi bi-chevron-right"></i>
+                            Privacy Policy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bi bi-chevron-right"></i>
+                            Terms & Conditions
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-lg-4 col-md-6">
+                <h5 class="footer-title">Contact Us</h5>
+
+                <div class="contact-item">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <span>Dhaka, Bangladesh</span>
+                </div>
+
+                <div class="contact-item">
+                    <i class="bi bi-envelope-fill"></i>
+                    <span>support@educourse.com</span>
+                </div>
+
+                <div class="contact-item">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span>+880 1234-567890</span>
+                </div>
+
+                <div class="contact-item">
+                    <i class="bi bi-clock-fill"></i>
+                    <span>Sat - Thu: 9:00 AM - 6:00 PM</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Footer -->
+        <div class="footer-bottom">
+            <div>
+                © 2026 <strong>EduCourse</strong>. All Rights Reserved.
+            </div>
+
+            <div>
+                Designed & Developed with
+                <i class="bi bi-heart-fill heart-icon"></i>
+                by <strong>Riyad</strong>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ================= FOOTER CSS ================= -->
+<style>
+
+    .site-footer {
+        background: linear-gradient(135deg, #111827, #1e293b);
+        color: #cbd5e1;
+        padding: 55px 0 0;
+        margin-top: 60px;
+    }
+
+    /* Brand */
+    .footer-brand h4 {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .footer-brand h4 i {
+        color: #0d6efd;
+        margin-right: 6px;
+    }
+
+    .footer-brand p {
+        font-size: 14px;
+        line-height: 1.8;
+        max-width: 360px;
+        margin-bottom: 20px;
+    }
+
+    /* Footer Titles */
+    .footer-title {
+        color: #ffffff;
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .footer-title::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 35px;
+        height: 3px;
+        background: #0d6efd;
+        border-radius: 10px;
+    }
+
+    /* Links */
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 11px;
+    }
+
+    .footer-links a {
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    .footer-links a i {
+        font-size: 10px;
+        margin-right: 7px;
+        color: #0d6efd;
+    }
+
+    .footer-links a:hover {
+        color: #ffffff;
+        padding-left: 5px;
+    }
+
+    /* Contact */
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+        font-size: 14px;
+    }
+
+    .contact-item i {
+        color: #0d6efd;
+        font-size: 16px;
+        min-width: 18px;
+    }
+
+    /* Social Links */
+    .social-links {
+        display: flex;
+        gap: 10px;
+    }
+
+    .social-links a {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #334155;
+        color: #ffffff;
+        border-radius: 50%;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .social-links a:hover {
+        background: #0d6efd;
+        transform: translateY(-4px);
+    }
+
+    /* Bottom */
+    .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.1);
+        margin-top: 40px;
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        font-size: 13px;
+        color: #94a3b8;
+    }
+
+    .footer-bottom strong {
+        color: #ffffff;
+    }
+
+    .heart-icon {
+        color: #ef4444;
+        margin: 0 3px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+
+        .site-footer {
+            padding-top: 40px;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+
+</style>
