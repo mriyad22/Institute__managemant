@@ -52,10 +52,18 @@ def student_profile_update(request, u_id):
 
 
 def student_profile_delete(request, d_id):
-    update_id = StudentModel.objects.get(id = d_id)
-    update_id.delete()
-    messages.success(request, "Student deleted")
-    return redirect("all_tea_std")
+    delete_id = StudentModel.objects.get(id = d_id)
+    if request.method == "POST":
+        delete_id.delete()
+        messages.success(request, "Student deleted")
+        return redirect("all_tea_std")
+
+    con = {
+        "object" : delete_id,
+        "title" : "Delete Student"
+    }
+
+    return render(request, "delete.html", con)
 
 
 
