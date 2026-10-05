@@ -157,9 +157,11 @@
         </div>
 
         <!-- ms-auto ক্লাস যোগ করা হয়েছে যা এটাকে ডানে পুশ করবে -->
+        {% if request.user.user_type == "Admin" %}
         <div class="d-flex justify-content-between align-items-center p-4 text-white rounded">
             <a href="{% url 'add_course_category' %}" class="submit px-3 py-1 btn btn-light">Add Course Category</a>
         </div>
+        {% endif %}
     </div>
 
 
@@ -186,7 +188,9 @@
           <tr>
             <th scope="col">SL</th>
             <th scope="col">Category Name</th>
+            {% if request.user.user_type == "Admin" %}
             <th scope="col">Action</th>
+            {% endif %}
           </tr>
         </thead>
 
@@ -205,11 +209,15 @@
                 {{ x.name }}
               </span>
             </td>
-
+            
+            {% if request.user.user_type == "Admin" %}
             <td>
               <a href="{% url 'delete_course_category' x.id %}" class="btn btn-danger ">Delete</a>
               <a href="{% url 'update_course_category' x.id %}" class="btn btn-primary ">Update</a>
             </td>
+            {% endif %}
+              
+
             
 
           </tr>

@@ -143,6 +143,23 @@
           <a class="nav-link" href="{% url 'all_tea_std' %}">AdminBoard</a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'teacher' %}"> Teachers</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'student' %}"> Students </a>
+        </li>
+
+        {% elif request.user.user_type == 'Student'%}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'student' %}"> Students </a>
+        </li>
+
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'teacher' %}"> Teachers</a>
+        </li>
         {% endif %}
 
         <li class="nav-item dropdown">
@@ -155,15 +172,6 @@
               <a class="dropdown-item" href="{% url 'course_list' %}">Courses</a>
             </li>
           </ul>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'teacher' %}"> Teachers</a>
-        </li>
-
-
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'student' %}"> Students </a>
         </li>
 
       </ul>
