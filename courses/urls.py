@@ -10,9 +10,17 @@ urlpatterns = [
     path("delete-ourse-category/<int:d_id>/", delete_course_category, name="delete_course_category"),
 
     #-----------> course urls
-
     path("add-course/",add_course, name="add_course"),
     path("courses/", course_list, name="course_list"),
     path("edit-course/<int:u_id>/", edit_course, name="edit_course"),
     path("delete-course/<int:d_id>/", delete_course, name="delete_course"),
+
+    #---------->Student enroll url
+    path("student-enroll/", student_enroll, name="student_enroll"),
+    path("student-enroll_edit/<int:pk>/", student_enroll_edit, name="student_enroll_edit"),
+
+    #-------->Teacher assign url
+    path("Teacher-assign", Teacher_assign, name="Teacher_assign"),
+    path("Teacher-assign-update/<int:pk>/", Teacher_assign_update, name="Teacher_assign_update"),
+    
 ]

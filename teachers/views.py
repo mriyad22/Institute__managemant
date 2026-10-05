@@ -3,9 +3,24 @@ from .forms import *
 from .views import *
 from django.contrib import messages
 
-# Create your views here.
+from courses.models import TeacherAssignModel
+
+
 def teacher(request):
-    return render(request, "tea/teacher.html", {"title" : "add teacher"})
+    if request.user.user_type == "Admin":
+        tea_course = TeacherAssignModel.objects.all()
+    elif request.user.user_type == "Teacher":
+        tea_course = TeacherAssignModel.objects.filter(teacher = request.user.teacher_profile)
+    else:
+        return redirect("dashboard")
+
+    con = {
+        "data" : tea_course,
+        "title" : "add teacher"
+    }
+    return render(request, "tea/teacher.html",con)
+
+
 
 def add_teacher(request):
     if request.method == "POST":

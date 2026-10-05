@@ -3,11 +3,22 @@ from django.contrib import messages
 from .forms import *
 from .models import *
 
+from courses.models import CourseEnrollmentModel
+
 # Create your views here.
 def studentview(request):
+    if request.user.user_type == "Admin":
+        course_details = CourseEnrollmentModel.objects.all()
+    elif request.user.user_type == "Student":
+        course_details = CourseEnrollmentModel.objects.filter(student = request.user.student_profile)
+    else:
+        return redirect("dashboard")
 
-
-    return render(request, "std/student.html", {"title" : "add student"})
+    con = {
+        "data" : course_details,
+        "title" : "add student"
+    }
+    return render(request, "std/student.html", con)
 
 
 def student_profile(request):
@@ -33,6 +44,10 @@ def student_profile(request):
 
 
 def student_profile_update(request, u_id):
+    # try:
+    #     update_id = request.user.student_profile
+    # except StudentModel.DoesNotExist:
+    #     update_id = None
     update_id = StudentModel.objects.get(id = u_id)
     if request.method == "POST":
         form_data = StudentProfileUpdateForm(request.POST, request.FILES, instance=update_id)

@@ -4,5 +4,6 @@ from .models import *
 # Register your models here.
 admin.site.register((
     CourseCategoryModel,
-    CourseModel
+    CourseModel,
+    CourseEnrollmentModel
 ))

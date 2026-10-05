@@ -558,34 +558,41 @@
 
 
                         {% if request.user.user_type == 'Student' %}
+                            
+                            {% if request.user.student_profile.id %}  
+                                <a
+                                    href="{% url 'student_update' request.user.student_profile.id %}"
+                                    class="btn btn-primary btn-profile">
+                                    ✏️ Edit Profile
+                                </a>
+                            {% endif %}
+                                
 
-                            <a
-                                href="{% url 'student_update' request.user.student_profile.id %}"
-                                class="btn btn-primary btn-profile">
-
-                                ✏️ Edit Profile
-
-                            </a>
 
                         {% elif request.user.user_type == 'Admin' %}
-
                             <a
                                 href="#"
                                 class="btn btn-primary btn-profile">
-
                                 ✏️ Edit Profile
-
                             </a>
-
                         {% else %}
 
-                            <a
-                                href="{% url 'tea_update' request.user.teacher_profile.id %}"
-                                class="btn btn-primary btn-profile">
+                            
+                            {% if request.user.teacher_profile.id %}
+                                <a
+                                    href="{% url 'tea_update' request.user.teacher_profile.id %}"
+                                    class="btn btn-primary btn-profile">
+                                    ✏️ Edit Profile
+                                </a>
+                            {% else %}
+                                <a
+                                    href="{% url 'tea_update' request.user.id %}"
+                                    class="btn btn-primary btn-profile">
+                                    ✏️ Edit Profile
+                                </a>
 
-                                ✏️ Edit Profile
-
-                            </a>
+                            {% endif %}
+                                
 
                         {% endif %}
 

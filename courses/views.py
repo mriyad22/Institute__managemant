@@ -3,6 +3,8 @@ from django.contrib import messages
 from .forms import *
 from .models import *
 
+
+
 def add_course_category(request):
     if request.method == "POST":
         form_data = CourseCategoryForm(request.POST)
@@ -149,3 +151,88 @@ def delete_course(request, d_id):
     }
 
     return render(request, "delete.html", con)
+
+
+
+
+def student_enroll(request):
+    form_data = CourseEnrollmentForm()
+    if request.method == "POST":
+        form_data = CourseEnrollmentForm(request.POST)
+        if form_data.is_valid():
+            form_data.save()
+            messages.success(request, "Student Enrolled")
+            return redirect("student")
+
+    con = {
+        "data" : form_data,
+        "title" : "Student Enroll",
+        "btn" : "Enroll"
+    }
+
+    return render(request, "form.html", con)
+
+
+def student_enroll_list(request):
+
+    return render(request, "std/student.html")
+
+
+def student_enroll_edit(request, pk):
+    u_id = get_object_or_404(CourseEnrollmentModel, pk = pk)
+
+    form_data = CourseEnrollmentForm(instance=u_id)
+    form_data = CourseEnrollmentForm(instance=u_id)
+    if request.method == "POST":
+        form_data = CourseEnrollmentForm(request.POST,  instance=u_id)
+        if form_data.is_valid():
+            form_data.save()
+            messages.success(request, "Student Enroll updated")
+            return redirect("student")
+
+    con = {
+        "data" : form_data,
+        "title" : "Student Enroll update",
+        "btn" : "Edit enroll"
+    }
+
+    return render(request, "form.html", con)
+
+
+
+def Teacher_assign(request):
+    if request.method == "POST":
+        form_data = TeacherAssignForm(request.POST)
+        if form_data.is_valid():
+            form_data.save()
+            messages.success(request, "Teacher Assigned")
+            return redirect("teacher")
+
+    form_data = TeacherAssignForm()
+    con = {
+        "data" : form_data,
+        "title" : "Teacher assign",
+        "btn" : "Assign"
+    }
+
+    return render(request, "form.html", con)
+
+
+
+def Teacher_assign_update(request, pk):
+    u_id = get_object_or_404(TeacherAssignModel, pk = pk)
+    if request.method == "POST":
+        form_data = TeacherAssignForm(request.POST, instance=u_id)
+        if form_data.is_valid():
+            form_data.save()
+            messages.success(request, "Teacher Assign updated")
+            return redirect("teacher")
+
+    form_data = TeacherAssignForm(instance=u_id)
+    con = {
+        "data" : form_data,
+        "title" : "Teacher assign updated",
+        "btn" : "Assign"
+    }
+
+    return render(request, "form.html", con)

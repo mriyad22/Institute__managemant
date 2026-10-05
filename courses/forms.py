@@ -14,3 +14,20 @@ class CourseForm(forms.ModelForm):
         model = CourseModel
         fields = "__all__"
         exclude = ["created_by", "updated_at", "created_at"]
+
+
+
+class CourseEnrollmentForm(forms.ModelForm):
+    class Meta:
+        model = CourseEnrollmentModel
+        fields = "__all__"
+        exclude = [
+            "adminssion_fee",
+            "due"
+        ]
+
+
+class TeacherAssignForm(forms.ModelForm):
+    class Meta:
+        model = TeacherAssignModel
+        fields = "__all__"

@@ -1,5 +1,7 @@
 from django.db import models
 from accounts.models import AuthUserModel
+from students.models import StudentModel
+from teachers.models import TeacherModel
 
 class CourseCategoryModel(models.Model):
     name = models.CharField(max_length=100)
@@ -35,3 +37,50 @@ class CourseModel(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+
+
+class CourseEnrollmentModel(models.Model):
+    student = models.ForeignKey(
+        StudentModel,
+        on_delete=models.SET_NULL,
+        related_name="student_enroll",
+        null=True
+    )
+
+    course = models.ForeignKey(
+        CourseModel,
+        on_delete=models.CASCADE,
+        null=True
+    )
+    adminssion_fee = models.FloatField(null=True)
+    pay = models.FloatField(null=True)
+    due = models.FloatField(null=True)
+
+    def __str__(self):
+        return f"{self.student.name}"
+
+
+    def save(self, *args, **kwargs):
+        self.adminssion_fee = self.course.course_fee
+        self.due = self.adminssion_fee - self.pay
+        super().save(*args, **kwargs)
+
+
+
+
+class TeacherAssignModel(models.Model):
+    teacher = models.ForeignKey(
+        TeacherModel, 
+        on_delete=models.SET_NULL,
+        related_name="course_teacher",
+        null=True
+    )
+    course = models.ForeignKey(
+        CourseModel,
+        on_delete=models.CASCADE,
+        null=True
+    )
+
+    def __str__(self):
+        return f"{self.teacher.name} -- {self.course.title}"
