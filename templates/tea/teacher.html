@@ -122,8 +122,9 @@ body {
 
 <div class="container mt-4"> 
 
+    {% if request.user.user_type == "Admin" %}
     <a href="{% url 'add_teacher' %}" class="btn btn-primary w-100 rounded-pill fw-semibold">Add teacher</a>
-
+    {% endif %}
     <br>
     <br>
 
