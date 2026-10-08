@@ -30,6 +30,7 @@ class CourseModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(
         AuthUserModel,
+        
         on_delete=models.SET_NULL,
         related_name="course_creator",
         null=True
@@ -43,19 +44,28 @@ class CourseModel(models.Model):
 class CourseEnrollmentModel(models.Model):
     student = models.ForeignKey(
         StudentModel,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name="student_enroll",
-        null=True
     )
 
     course = models.ForeignKey(
         CourseModel,
         on_delete=models.CASCADE,
-        null=True
     )
     adminssion_fee = models.FloatField(null=True)
     pay = models.FloatField(null=True)
     due = models.FloatField(null=True)
+
+    #A student cannot register for the same course a second time.
+    # That's why use UniqueConstraint
+    class Meta: 
+        constraints = [
+            models.UniqueConstraint(
+                fields=["student", "course" ],
+                name="unique_student_course"
+            )
+        ]
+
 
     def __str__(self):
         return f"{self.student.name}"
