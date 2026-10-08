@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.db.models import Q
 from .forms import *
 from .models import *
 
@@ -67,6 +68,8 @@ def delete_course_category(request, d_id):
 
 def course_category_list(request):
     category = CourseCategoryModel.objects.all()
+    #Multiple condition
+    # category = CourseCategoryModel.objects.exclude(Q(name = "Programming") | Q(name = "Cybersecurity"))
 
     con = {
         "data" : category,
@@ -81,6 +84,15 @@ def course_category_list(request):
 
 def course_list(request):
     course = CourseModel.objects.all()
+    # course = CourseModel.objects.filter(course_fee__gte = 4000)
+    # course.update(course_fee = 4500)
+    # course = CourseModel.objects.order_by("-id")
+    # course = CourseModel.objects.values('id','title', 'course_thumbnail', 'category', 'course_fee')
+    # new_course = CourseModel.objects.order_by("-id").first()
+    # new_course = CourseModel.objects.order_by("-id").exists()
+    # new_course = CourseModel.objects.count()
+    # print(new_course)
+    # course = CourseModel.objects.exclude(course_module = "python for all")
 
     con = {
         "data" : course,
@@ -169,13 +181,14 @@ def student_enroll(request):
         "title" : "Student Enroll",
         "btn" : "Enroll"
     }
-
     return render(request, "form.html", con)
+
 
 
 def student_enroll_list(request):
 
     return render(request, "std/student.html")
+
 
 
 def student_enroll_edit(request, pk):
